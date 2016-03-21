@@ -1,6 +1,6 @@
 name: TeamSurvival
 main: nmt.minecraft.TeamSurvival.TeamSurvivalPlugin
-version: 0.3
+version: 0.4.1
 permissions:
     teamsurvival.*:
         children:

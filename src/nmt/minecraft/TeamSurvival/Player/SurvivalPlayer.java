@@ -112,8 +112,8 @@ public class SurvivalPlayer implements Listener {
 		Player p = getPlayer();
 		this.returnToPreGame(); //Send then back to their pregame location
 		if (p != null) {
-			p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 0);
-			p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 1, 0);
+			p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
+			p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_TWINKLE, 1, 0);
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class SurvivalPlayer implements Listener {
 		Player p = getPlayer();
 		this.returnToPreGame(); //Send them back to their pregame location
 		if (p != null) {
-			p.playSound(p.getLocation(), Sound.ENDERMAN_STARE, 1, 0);
+			p.playSound(p.getLocation(), Sound.ENTITY_ENDERMEN_STARE, 1, 0);
 		}
 	}
 	

@@ -293,16 +293,16 @@ public class Mob {
 	}
 	
 	/**
-	 * This method adds teh enchantment to the itemstack for the weapon
+	 * This method adds the enchantment to the itemstack for the weapon
 	 * @return true if it worked, false if there was no weapon to enchant
 	 */
 	private boolean enchantWeapon() {
 		//make sure the weapon exists
-		if(weapon == null){
+		if(weapon == null) {
 			return false;
 		}
 		
-		if(weapon.getData().getItemType().equals(Material.BOW)){
+		if(weapon.getData().getItemType().equals(Material.BOW)) {
 			//its a bow
 			switch(rGen.nextInt(3)){
 			case 0://power
@@ -318,7 +318,7 @@ public class Mob {
 			case 2://fire aspect
 				weapon.addEnchantment(Enchantment.ARROW_FIRE, 1);
 			}
-		}else{
+		} else {
 			//its a sword
 			
 			//knockback
@@ -364,27 +364,27 @@ public class Mob {
 		for(int i=0; i<2; i++){
 			chances[i] = 0.0;
 		}
-		for(int wave=2; wave<totalWaves; wave++){
+		for(int wave=2; wave<totalWaves; wave++) {
 			double exp = -1 * rGen.nextDouble() * (wave-pivotPoint);
-			double percentEnch = max/(1+Math.pow(Math.E,exp));
+			double percentEnch = max /(1 + Math.pow(Math.E, exp));
 			
 			chances[wave] = percentEnch;
 		}
 		
 		System.out.println("Chances: ");
-		for(int i=0; i<totalWaves; i++){
-			System.out.println("  Wave: "+i+"    %: "+chances[i]);
+		for(int i = 0; i < totalWaves; i++) {
+			System.out.println("  Wave: " + i + "    %: " + chances[i]);
 		}
 	}
 	
-	public LivingEntity spawnMob(Location spawnLocation){
+	public LivingEntity spawnMob(Location spawnLocation) {
 		LivingEntity mob;
 		
-		if(type.equalsIgnoreCase("jockey")){
+		if(type.equalsIgnoreCase("jockey")) {
 			LivingEntity jockeyVehicle = (LivingEntity)spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.SPIDER);
 			mob = (LivingEntity)spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.SKELETON);
 			jockeyVehicle.setPassenger(mob);
-		}else{
+		} else {
 			mob = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.valueOf(type));
 		}
 		
@@ -417,7 +417,7 @@ public class Mob {
 		if(armor[3]!= null)//boots
 			spawnedEntity.getEquipment().setBoots(armor[3]);
 		if(weapon != null)
-			spawnedEntity.getEquipment().setItemInHand(weapon);
+			spawnedEntity.getEquipment().setItemInMainHand(weapon);
 		
 		return spawnedEntity;
 	}
@@ -431,20 +431,14 @@ public class Mob {
 		
 		newMob.type=this.type;
 		
-		for(int i=0; i<this.armor.length; i++){
+		for(int i = 0; i < this.armor.length; i++){
 			if(this.armor[i] != null){
 				newMob.armor[i] = this.armor[i].clone();
-			}else{
+			} else {
 				newMob.armor[i] = null;
 			}
-		} else {
-			ent.getEquipment().clear();
-			ItemStack weapon;
-			if(ent.getType() == EntityType.SKELETON) {
-				weapon = new ItemStack(Material.BOW);
-				ent.getEquipment().setItemInHand(weapon);
-			}
 		}
+		
 		if(this.weapon != null)
 			newMob.weapon = this.weapon.clone();
 		

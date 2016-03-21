@@ -64,7 +64,7 @@ public class SkeletonGroupMob extends Mob {
 		
 		EntityEquipment equips = skeleton.getEquipment();
 		
-		equips.setItemInHand(defaultEquipment.SWORD.getItem());
+		equips.setItemInMainHand(defaultEquipment.SWORD.getItem());
 		equips.setChestplate(defaultEquipment.CHESTPLATE.getItem());
 		equips.setHelmet(defaultEquipment.HELMET.getItem());
 		equips.setLeggings(defaultEquipment.LEGGINGS.getItem());

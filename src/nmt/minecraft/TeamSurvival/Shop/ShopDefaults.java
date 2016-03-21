@@ -4,21 +4,20 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.potion.Potion;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
 public enum ShopDefaults {
 	
 	/*
 	sharpness 1 books  - 75
-unbreaking 1 - 150
-knockback 1 - 50
-smite 1 - 50
-fire aspect/fire 1 - 100
-power 1 - 75
-infinity bow enchantment - 200
-
-
+	unbreaking 1 - 150
+	knockback 1 - 50
+	smite 1 - 50
+	fire aspect/fire 1 - 100
+	power 1 - 75
+	infinity bow enchantment - 200
 	 */
 	WOOD_SWORD(Material.WOOD_SWORD, 1, 20),
 	STONE_SWORD(Material.STONE_SWORD, 1, 75),
@@ -37,24 +36,30 @@ infinity bow enchantment - 200
 	FLAME(EnchantedBook.FLAME.getEnchantedBook(), 100),
 	POWER(EnchantedBook.POWER.getEnchantedBook(), 75),
 	INFINITY(EnchantedBook.INFINITY.getEnchantedBook(), 200),
-	POTIONHEALTH((new Potion(PotionType.INSTANT_HEAL, 1)).toItemStack(1), 50),
-	POTIONHEALTH2((new Potion(PotionType.INSTANT_HEAL, 2)).toItemStack(1), 100),
-	POTIONREGEN((new Potion(PotionType.REGEN, 1)).toItemStack(1), 100),
-	POTIONREGEN2((new Potion(PotionType.REGEN, 2)).toItemStack(1), 200),
-	POTIONSWIFT((new Potion(PotionType.SPEED, 1)).toItemStack(1), 50),
-	POTIONSTRENGTH((new Potion(PotionType.STRENGTH, 1)).toItemStack(1), 350);
+	POTIONHEALTH(new PotionData(PotionType.INSTANT_HEAL, false, false), 50),
+	POTIONHEALTH2(new PotionData(PotionType.INSTANT_HEAL, false, true), 100),
+	POTIONREGEN(new PotionData(PotionType.REGEN, false, false), 100),
+	POTIONREGEN2(new PotionData(PotionType.REGEN, false, true), 200),
+	POTIONSWIFT(new PotionData(PotionType.SPEED, false, false), 50),
+	POTIONSTRENGTH(new PotionData(PotionType.SPEED, false, true), 350);
 	
 	private ItemStack item;
 	
 	private int cost;
 	
 	private ShopDefaults(Material type, int amount, int cost) {
-		item = new ItemStack(type, amount);
+		this.item = new ItemStack(type, amount);
 		this.cost = cost;
 	}
 	
 	private ShopDefaults(ItemStack item, int cost) {
 		this.item = item;
+		this.cost = cost;
+	}
+	
+	private ShopDefaults(PotionData data, int cost) {
+		this.item = new ItemStack(Material.POTION);
+		((PotionMeta)this.item.getItemMeta()).setBasePotionData(data);
 		this.cost = cost;
 	}
 
